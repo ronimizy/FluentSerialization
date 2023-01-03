@@ -1,4 +1,4 @@
-# FluentSerialization
+# FluentSerialization [![badge](https://img.shields.io/nuget/v/ronimizy.FluentSerialization?style=flat-square)](https://www.nuget.org/packages/ronimizy.FluentSerialization/)
 
 A package that provides a simple EF like fluent API for configuring serializer contracts.
 
@@ -165,7 +165,7 @@ builder.Property(x => x.A).PositionedAt(2);
 builder.Property(x => x.B).PositionedAt(1);
 ```
 
-# FluentSerialization.Extensions.NewtonsoftJson
+# FluentSerialization.Extensions.NewtonsoftJson [![badge](https://img.shields.io/nuget/v/ronimizy.FluentSerialization.Extensions.NewtonsoftJson?style=flat-square)](https://www.nuget.org/packages/ronimizy.FluentSerialization.Extensions.NewtonsoftJson/)
 
 A provider for configuring Newtonsoft.Json contract resolvers / serializer settings.
 
