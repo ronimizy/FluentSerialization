@@ -16,7 +16,7 @@ public class PredicateTests
         var settings = ConfigurationBuilder.Build(builder =>
         {
             builder.Type<Record>().Property(x => x.Value).ShouldSerializeWhen(x => x.Value % 2 is 1);
-        }).AsSettings();
+        }).AsNewtonsoftSerializationSettings();
 
         var obj = new Record(value, "one");
 
@@ -40,7 +40,7 @@ public class PredicateTests
         var settings = ConfigurationBuilder.Build(builder =>
         {
             builder.Type<PlainObject>().Property(x => x.Value).ShouldDeserializeWhen(x => x.ShouldDeserialize);
-        }).AsSettings();
+        }).AsNewtonsoftSerializationSettings();
 
         var obj = new PlainObject { ShouldDeserialize = flag, Value = value };
         var serialized = JsonConvert.SerializeObject(obj, settings);

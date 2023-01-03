@@ -13,7 +13,7 @@ public class TypeKeyTests
     {
         // Arrange
         var obj = new FirstDerived(1, "a");
-        var settings = new Configuration().Build().AsSettings();
+        var settings = new Configuration().Build().AsNewtonsoftSerializationSettings();
 
         settings = new JsonSerializerSettings(settings)
         {
@@ -40,7 +40,7 @@ public class TypeKeyTests
             new SecondDerived(2, 1.2),
         };
 
-        var settings = new Configuration().Build().AsSettings();
+        var settings = new Configuration().Build().AsNewtonsoftSerializationSettings();
 
         settings = new JsonSerializerSettings(settings)
         {
@@ -62,7 +62,7 @@ public class TypeKeyTests
     {
         // Arrange
         var obj = new FirstDerived(1, "a");
-        var settings = new Configuration().Build().AsSettings();
+        var settings = new Configuration().Build().AsNewtonsoftSerializationSettings();
         var serialized = JsonConvert.SerializeObject(obj, typeof(Base), settings);
 
         // Act
@@ -81,7 +81,7 @@ public class TypeKeyTests
             new FirstDerived(1, "a"),
             new SecondDerived(2, 1.2),
         };
-        var settings = new Configuration().Build().AsSettings();
+        var settings = new Configuration().Build().AsNewtonsoftSerializationSettings();
         var serialized = JsonConvert.SerializeObject(array, settings);
 
         // Act
@@ -101,7 +101,7 @@ public class TypeKeyTests
         {
             configuration.Type<FirstDerived>().HasSerializationTypeKey("A");
             configuration.Type<ThirdDerived>().HasDeserializationTypeKey("A");
-        }).AsSettings();
+        }).AsNewtonsoftSerializationSettings();
 
         var serialized = JsonConvert.SerializeObject(obj, typeof(Base), settings);
 

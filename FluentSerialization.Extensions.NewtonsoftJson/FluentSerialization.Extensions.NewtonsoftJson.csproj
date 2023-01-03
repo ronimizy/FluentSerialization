@@ -5,14 +5,37 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>ronimizy.FluentSerialization.Extensions.NewtonsoftJson</PackageId>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Title>FluentSerialization.Extensions.NewtonsoftJson</Title>
+        <Authors>ronimizy</Authors>
+        <Description>A provider for configuring Newtonsoft.Json contract resolvers / serializer settings</Description>
+        <PackageProjectUrl>https://github.com/ronimizy/FluentSerialization</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/ronimizy/FluentSerialization</RepositoryUrl>
+        <RepositoryType>github</RepositoryType>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageVersion>1.0.0</PackageVersion>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageReleaseNotes></PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+        <None Include="..\README.md" Pack="true" PackagePath="\" />
+        <None Include="..\LICENSE" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\FluentSerialization\FluentSerialization.csproj" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\FluentSerialization\FluentSerialization.csproj" />
     </ItemGroup>
 
 </Project>

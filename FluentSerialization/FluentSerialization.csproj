@@ -6,17 +6,34 @@
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>ronimizy.FluentSerialization</PackageId>
     </PropertyGroup>
-    
+
     <PropertyGroup>
         <Title>FluentSerialization</Title>
         <Authors>ronimizy</Authors>
         <Description>A convension based tool for configuring serialization contracts with fluent API</Description>
+        <PackageProjectUrl>https://github.com/ronimizy/FluentSerialization</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/ronimizy/FluentSerialization</RepositoryUrl>
+        <RepositoryType>github</RepositoryType>
+        <PackageTags>serialization;fluent;configuration;contract</PackageTags>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageVersion>1.0.0</PackageVersion>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageReleaseNotes></PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="FluentScanning" Version="2.0.1" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+        <None Include="..\README.md" Pack="true" PackagePath="\" />
+        <None Include="..\LICENSE" Pack="true" PackagePath="\" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="FluentScanning" Version="2.0.1" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     </ItemGroup>
 
     <ItemGroup>

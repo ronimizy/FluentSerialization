@@ -20,7 +20,7 @@ public class PositionTests
                 builder.Property(x => x.A).PositionedAt(2);
                 builder.Property(x => x.B).PositionedAt(1);
             });
-        }).AsSettings();
+        }).AsNewtonsoftSerializationSettings();
 
         var verifySettings = new VerifySettings();
         verifySettings.UseMethodName(nameof(SerializeObject_Should_UseSpecifiedPositions));
@@ -45,7 +45,7 @@ public class PositionTests
                 builder.Property(x => x.A).PositionedAt(2);
                 builder.Property(x => x.B).PositionedAt(1);
             });
-        }).AsSettings();
+        }).AsNewtonsoftSerializationSettings();
         
         var serialized = JsonConvert.SerializeObject(obj, settings);
         
