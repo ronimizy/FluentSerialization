@@ -1,0 +1,6 @@
+﻿{
+  Value: 125,
+  Payload: {
+    Value: abc
+  }
+}

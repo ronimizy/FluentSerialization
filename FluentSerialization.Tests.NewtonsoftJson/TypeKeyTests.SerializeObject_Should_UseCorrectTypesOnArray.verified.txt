@@ -1,0 +1,12 @@
+﻿[
+  {
+    "$type": "FirstDerivedKey",
+    "Payload": "a",
+    "Value": 1
+  },
+  {
+    "$type": "SecondDerivedKey",
+    "Size": 1.2,
+    "Value": 2
+  }
+]

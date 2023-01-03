@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <Title>FluentSerialization</Title>
+        <Authors>ronimizy</Authors>
+        <Description>A convension based tool for configuring serialization contracts with fluent API</Description>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentScanning" Version="2.0.1" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="FluentSerialization.Extensions.NewtonsoftJson" />
+    </ItemGroup>
+</Project>
