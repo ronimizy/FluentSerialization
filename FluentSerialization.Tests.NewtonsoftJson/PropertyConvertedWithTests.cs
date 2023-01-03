@@ -12,7 +12,7 @@ public class PropertyConvertedWithTests
 
     public PropertyConvertedWithTests()
     {
-        _settings = new Configuration().Build().AsSettings();
+        _settings = new Configuration().Build().AsNewtonsoftSerializationSettings();
     }
 
     [Fact]

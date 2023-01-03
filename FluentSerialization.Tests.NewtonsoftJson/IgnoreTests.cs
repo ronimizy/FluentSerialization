@@ -12,7 +12,7 @@ public class IgnoreTests
 
     public IgnoreTests()
     {
-        _settings = new Configuration().Build().AsSettings();
+        _settings = new Configuration().Build().AsNewtonsoftSerializationSettings();
     }
 
     [Fact]

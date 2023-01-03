@@ -16,7 +16,7 @@ public class TypeConvertedWithTests
         var settings = ConfigurationBuilder.Build(configuration =>
         {
             configuration.Type<Record>().ConvertedWith(x => x.Value, x => new Record(x));
-        }).AsSettings();
+        }).AsNewtonsoftSerializationSettings();
 
         var verifySettings = new VerifySettings();
         verifySettings.UseMethodName(nameof(SerializeObject_Should_UseTypeConverterCorrectly));
@@ -35,7 +35,7 @@ public class TypeConvertedWithTests
         var settings = ConfigurationBuilder.Build(configuration =>
         {
             configuration.Type<Record>().ConvertedWith(x => x.Value, x => new Record(x));
-        }).AsSettings();
+        }).AsNewtonsoftSerializationSettings();
 
         var obj = new Record("test");
         var serialized = JsonConvert.SerializeObject(obj, settings);

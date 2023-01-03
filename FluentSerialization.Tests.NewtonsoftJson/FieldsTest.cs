@@ -17,7 +17,7 @@ public class FieldsTest
         {
             configuration.Type<Type>().Property("_a").Called("A");
             configuration.Type<Type>().Property(x => x._b).Called("B");
-        }).AsSettings();
+        }).AsNewtonsoftSerializationSettings();
         
         var verifySettings = new VerifySettings();
         verifySettings.UseMethodName(nameof(SerializeObject_Should_SerializeFields));
@@ -39,7 +39,7 @@ public class FieldsTest
         {
             configuration.Type<Type>().Property("_a").Called("A");
             configuration.Type<Type>().Property(x => x._b).Called("B");
-        }).AsSettings();
+        }).AsNewtonsoftSerializationSettings();
         
         var serialized = JsonConvert.SerializeObject(obj, settings);
 

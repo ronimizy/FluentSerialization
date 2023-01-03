@@ -8,7 +8,7 @@ public static class ConfigurationExtensions
     /// <summary>
     ///     Converts specified configuration to a <see cref="JsonSerializerSettings" /> instance.
     /// </summary>
-    public static JsonSerializerSettings AsSettings(this IConfiguration configuration)
+    public static JsonSerializerSettings AsNewtonsoftSerializationSettings(this IConfiguration configuration)
     {
         return new JsonSerializerSettings
         {
