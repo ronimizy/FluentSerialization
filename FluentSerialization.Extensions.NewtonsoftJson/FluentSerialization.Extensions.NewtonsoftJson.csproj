@@ -6,6 +6,7 @@
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>ronimizy.FluentSerialization.Extensions.NewtonsoftJson</PackageId>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -25,16 +26,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\README.md" Pack="true" PackagePath="\"/>
-        <None Include="..\LICENSE" Pack="true" PackagePath="\"/>
+        <None Include="..\README.md" Pack="true" PackagePath="\" />
+        <None Include="..\LICENSE" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.2"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\FluentSerialization\FluentSerialization.csproj"/>
+        <ProjectReference Include="..\FluentSerialization\FluentSerialization.csproj" />
     </ItemGroup>
 
 </Project>
