@@ -70,6 +70,12 @@ internal class ObjectPropertyConfigurationAdapter<THost, TProperty> :
         return this;
     }
 
+    public IPropertyConfigurationBuilder<THost, object> ShouldSpecifyType(bool specifyType)
+    {
+        _builder.ShouldSpecifyType(specifyType);
+        return this;
+    }
+
     public IPropertyConfigurationBuilder<THost, TCastProperty> Cast<TCastProperty>()
     {
         if (this is IPropertyConfigurationBuilder<THost, TCastProperty> builder)

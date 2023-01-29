@@ -61,4 +61,9 @@ public interface IPropertyConfigurationBuilder<out THost, TProperty>
     ///     Specifies a property position in serialized data.
     /// </summary>
     IPropertyConfigurationBuilder<THost, TProperty> PositionedAt(int position);
+    
+    /// <summary>
+    ///     Specifies whether the property should have type explicitly specified in serialized data
+    /// </summary>
+    IPropertyConfigurationBuilder<THost, TProperty> ShouldSpecifyType(bool specifyType = true);
 }

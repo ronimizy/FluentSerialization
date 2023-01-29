@@ -120,5 +120,10 @@ internal class CustomContractResolver : DefaultContractResolver
         property.Writable = configuration.AccessMode.HasFlag(ValueAccessMode.CanWrite);
         property.ShouldSerialize = serializationPredicateConsumer.Predicate;
         property.ShouldDeserialize = deserializationPredicateConsumer.Predicate;
+
+        if (configuration.SpecifyType is not null)
+        {
+            property.TypeNameHandling = configuration.SpecifyType.Value ? TypeNameHandling.All : TypeNameHandling.None;
+        }
     }
 }
