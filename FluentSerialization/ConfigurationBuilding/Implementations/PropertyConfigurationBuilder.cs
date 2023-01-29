@@ -11,6 +11,7 @@ internal class PropertyConfigurationBuilder<THost, TProperty> : IPropertyConfigu
     private string _name;
     private ValueAccessMode _valueAccessMode;
     private int? _position;
+    private bool? _shouldSpecifyType;
     private IConversionProvider? _conversionProvider;
     private IValuePredicateProvider? _serializationPredicateProvider;
     private IValuePredicateProvider? _deserializationPredicateProvider;
@@ -77,6 +78,12 @@ internal class PropertyConfigurationBuilder<THost, TProperty> : IPropertyConfigu
         return this;
     }
 
+    public IPropertyConfigurationBuilder<THost, TProperty> ShouldSpecifyType(bool specifyType)
+    {
+        _shouldSpecifyType = specifyType;
+        return this;
+    }
+
     public IPropertyConfigurationBuilder<THost, TCastProperty> Cast<TCastProperty>()
     {
         if (this is IPropertyConfigurationBuilder<THost, TCastProperty> builder)
@@ -103,7 +110,8 @@ internal class PropertyConfigurationBuilder<THost, TProperty> : IPropertyConfigu
             _position,
             _conversionProvider,
             _serializationPredicateProvider,
-            _deserializationPredicateProvider
+            _deserializationPredicateProvider,
+            _shouldSpecifyType
         );
     }
 }

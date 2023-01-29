@@ -19,10 +19,10 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <PackageVersion>1.0.1</PackageVersion>
+        <PackageVersion>1.1.0</PackageVersion>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageReleaseNotes>Added format existing serialization settings method</PackageReleaseNotes>
+        <PackageReleaseNotes>Added property type handling configuratiom</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>

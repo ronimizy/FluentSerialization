@@ -16,7 +16,8 @@ internal class PropertyConfiguration : IPropertyConfiguration
         int? position,
         IConversionProvider? conversionProvider,
         IValuePredicateProvider? serializationFilterProvider,
-        IValuePredicateProvider? deserializationFilterProvider)
+        IValuePredicateProvider? deserializationFilterProvider,
+        bool? specifyType)
     {
         Info = info;
         Name = name;
@@ -24,6 +25,7 @@ internal class PropertyConfiguration : IPropertyConfiguration
         _conversionProvider = conversionProvider;
         _serializationFilterProvider = serializationFilterProvider;
         _deserializationFilterProvider = deserializationFilterProvider;
+        SpecifyType = specifyType;
         Position = position;
     }
 
@@ -31,6 +33,7 @@ internal class PropertyConfiguration : IPropertyConfiguration
     public string Name { get; }
     public ValueAccessMode AccessMode { get; }
     public int? Position { get; }
+    public bool? SpecifyType { get; }
 
     public void Accept(IConversionConsumer consumer)
         => _conversionProvider?.Provide(consumer);

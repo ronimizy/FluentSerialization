@@ -12,6 +12,16 @@ serviceCollection.AddFluentSerialization(new SerializationConfiguration()).AddNe
 var provider = serviceCollection.BuildServiceProvider();
 var settings = provider.GetRequiredService<JsonSerializerSettings>();
 
+IReadOnlyCollection<A> array = new A[]
+{
+    new A(1, 2),
+    new D(3, 4),
+};
+
+var x = new X(array);
+
+var serializedX = JsonConvert.SerializeObject(x, settings);
+
 var a = new A(1, 2);
 
 Console.WriteLine(a);
@@ -28,6 +38,10 @@ namespace FluentSerialization.Playground
 {
     public record A(int B, int C);
 
+    public record D(int B, int C) : A(B, C);
+
+    public record X(IReadOnlyCollection<A> Array);
+
     class SerializationConfiguration : ISerializationConfiguration
     {
         public void Configure(ISerializationConfigurationBuilder configurationBuilder)
@@ -39,6 +53,10 @@ namespace FluentSerialization.Playground
                 builder.Property(a => a.C).Ignored();
                 builder.Property(x => x.B).ConvertedWith(x => (x + 2).ToString(), int.Parse);
             });
+
+            configurationBuilder.Type<D>().HasTypeKey("D");
+
+            configurationBuilder.Type<X>().Property(x => x.Array).ShouldSpecifyType(false);
         }
     }
 }

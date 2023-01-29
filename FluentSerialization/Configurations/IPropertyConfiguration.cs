@@ -24,6 +24,11 @@ public interface IPropertyConfiguration
     ///     Position in serialized data
     /// </summary>
     public int? Position { get; }
+    
+    /// <summary>
+    ///     Specifies whether the property should have type explicitly specified in serialized data
+    /// </summary>
+    public bool? SpecifyType { get; }
 
     void Accept(IConversionConsumer consumer);
 
