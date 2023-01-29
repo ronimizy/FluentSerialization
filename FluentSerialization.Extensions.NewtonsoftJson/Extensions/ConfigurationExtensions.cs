@@ -23,4 +23,12 @@ public static class ConfigurationExtensions
             TypeNameHandling = TypeNameHandling.Auto,
         };
     }
+
+    public static void ApplyToSerializationSettings(this IConfiguration configuration, JsonSerializerSettings settings)
+    {
+        settings.SerializationBinder = new CustomSerializationBinder(configuration);
+        settings.ContractResolver = new CustomContractResolver(configuration);
+        settings.TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full;
+        settings.TypeNameHandling = TypeNameHandling.Auto;
+    }
 }
