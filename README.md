@@ -48,7 +48,15 @@ services.AddFluentSerialization(typeof(IAssemblyMarker));
 services.AddFluentSerialization(new SerializationConfiguration());
 ```
 
-## Configuration options
+## Behaviour configuration
+
+You can configure global behavior using `Options` method:
+
+```csharp
+configurationBuilder.Options(o => { ... });
+```
+
+## Configuration
 
 ### Type
 
@@ -163,6 +171,14 @@ You can specify a position of a property in serialized data using `PositionedAt`
 ```csharp
 builder.Property(x => x.A).PositionedAt(2);
 builder.Property(x => x.B).PositionedAt(1);
+```
+
+#### Explicit type specification
+
+You can configure property's explicit type specification using `ShouldSpecifyType` method:
+
+```csharp
+builder.Property(x => x.A).ShouldSpecifyType();
 ```
 
 # FluentSerialization.Extensions.NewtonsoftJson [![badge](https://img.shields.io/nuget/v/ronimizy.FluentSerialization.Extensions.NewtonsoftJson?style=flat-square)](https://www.nuget.org/packages/ronimizy.FluentSerialization.Extensions.NewtonsoftJson/)
