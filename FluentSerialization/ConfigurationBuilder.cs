@@ -2,6 +2,7 @@ using System.Text;
 using FluentSerialization.Exceptions;
 using FluentSerialization.Implementations;
 using FluentSerialization.Models;
+using FluentSerialization.Tools;
 
 namespace FluentSerialization;
 
@@ -19,8 +20,6 @@ public static class ConfigurationBuilder
     /// <summary>
     ///     Builds a configuration from given delegate
     /// </summary>
-    /// <param name="action"></param>
-    /// <returns></returns>
     public static IConfiguration Build(Action<ISerializationConfigurationBuilder> action)
     {
         var configuration = new DelegateSerializationConfiguration(action);
@@ -41,10 +40,12 @@ public static class ConfigurationBuilder
         IEnumerable<ISerializationConfiguration> configurations,
         IEnumerable<IConfigurationValidator> validators)
     {
+        var options = new FluentSerializationOptions();
+
         ITypeConfiguration[] typeConfigurations = configurations
             .Select(x =>
             {
-                var serializationBuilder = new SerializationConfigurationBuilder();
+                var serializationBuilder = new SerializationConfigurationBuilder(options);
                 x.Configure(serializationBuilder);
 
                 return serializationBuilder;
@@ -59,7 +60,7 @@ public static class ConfigurationBuilder
             .ToArray();
 
         if (errors.Length is 0)
-            return new Configuration(BuildForest(typeConfigurations));
+            return new Configuration(BuildForest(typeConfigurations), options);
 
         var builder = new StringBuilder("Invalid serialization configuration:\n");
         Exception? exception = null;

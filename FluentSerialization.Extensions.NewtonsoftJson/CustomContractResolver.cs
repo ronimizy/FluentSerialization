@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Reflection;
 using FluentSerialization.Extensions.NewtonsoftJson.Conversions;
@@ -32,8 +33,27 @@ internal class CustomContractResolver : DefaultContractResolver
 
             var typeConfiguration = visitor.Configuration;
 
-            return typeConfiguration is null ? base.ResolveContract(type) : ResolveContract(typeConfiguration);
+            return typeConfiguration is null ? ResolveContractDefault(type) : ResolveContract(typeConfiguration);
         });
+    }
+
+    private JsonContract ResolveContractDefault(Type type)
+    {
+        var contract = base.ResolveContract(type);
+
+        if (_configuration.ShouldEraseEnumerableType is false)
+            return contract;
+
+        if (contract is not JsonObjectContract objectContract)
+            return contract;
+
+        foreach (var property in objectContract.Properties)
+        {
+            if (typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
+                property.TypeNameHandling = TypeNameHandling.None;
+        }
+
+        return contract;
     }
 
     private JsonContract ResolveContract(ITypeConfiguration configuration)
@@ -124,6 +144,10 @@ internal class CustomContractResolver : DefaultContractResolver
         if (configuration.SpecifyType is not null)
         {
             property.TypeNameHandling = configuration.SpecifyType.Value ? TypeNameHandling.All : TypeNameHandling.None;
+        }
+        else if (_configuration.ShouldEraseEnumerableType && typeof(IEnumerable).IsAssignableFrom(type))
+        {
+            property.TypeNameHandling = TypeNameHandling.None;
         }
     }
 }

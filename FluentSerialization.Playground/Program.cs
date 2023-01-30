@@ -55,8 +55,6 @@ namespace FluentSerialization.Playground
             });
 
             configurationBuilder.Type<D>().HasTypeKey("D");
-
-            configurationBuilder.Type<X>().Property(x => x.Array).ShouldSpecifyType(false);
         }
     }
 }

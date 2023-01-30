@@ -6,4 +6,6 @@ namespace FluentSerialization;
 public interface IConfiguration
 {
     IReadOnlyCollection<ITypeConfiguration> Types { get; }
+    
+    bool ShouldEraseEnumerableType { get; }
 }

@@ -4,15 +4,18 @@ using FluentSerialization.Binding;
 using FluentSerialization.Binding.Implementations;
 using FluentSerialization.Extensions;
 using FluentSerialization.Internal;
+using FluentSerialization.Tools;
 
 namespace FluentSerialization.Implementations;
 
 internal class SerializationConfigurationBuilder : ISerializationConfigurationBuilder
 {
     private readonly Dictionary<Type, ITypeConfigurationBuilderInternal> _builders;
+    private readonly FluentSerializationOptions _options;
 
-    public SerializationConfigurationBuilder()
+    public SerializationConfigurationBuilder(FluentSerializationOptions options)
     {
+        _options = options;
         _builders = new Dictionary<Type, ITypeConfigurationBuilderInternal>();
     }
 
@@ -68,6 +71,9 @@ internal class SerializationConfigurationBuilder : ISerializationConfigurationBu
             binder.Bind();
         }
     }
+
+    public void Options(Action<FluentSerializationOptions> options)
+        => options.Invoke(_options);
 
     private ITypeConfigurationBuilder<T> GetOrAddBuilder<T>()
     {

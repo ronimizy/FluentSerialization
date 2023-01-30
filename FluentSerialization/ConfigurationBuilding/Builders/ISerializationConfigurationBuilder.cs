@@ -1,4 +1,5 @@
 using FluentScanning;
+using FluentSerialization.Tools;
 
 namespace FluentSerialization;
 
@@ -21,4 +22,9 @@ public interface ISerializationConfigurationBuilder
     ///     Adds configurations from the specified assemblies
     /// </summary>
     void AddConfigurationsFromAssemblies(params AssemblyProvider[] providers);
+    
+    /// <summary>
+    ///     Configures options
+    /// </summary>
+    void Options(Action<FluentSerializationOptions> options);
 }

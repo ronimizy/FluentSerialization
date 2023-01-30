@@ -20,10 +20,10 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <PackageVersion>1.1.0</PackageVersion>
+        <PackageVersion>1.2.0</PackageVersion>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageReleaseNotes>Added property type handling configuratiom</PackageReleaseNotes>
+        <PackageReleaseNotes>Added options</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
