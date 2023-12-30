@@ -1,3 +1,5 @@
+using FluentSerialization.Models;
+
 namespace FluentSerialization;
 
 /// <summary>
@@ -66,4 +68,9 @@ public interface IPropertyConfigurationBuilder<out THost, TProperty>
     ///     Specifies whether the property should have type explicitly specified in serialized data
     /// </summary>
     IPropertyConfigurationBuilder<THost, TProperty> ShouldSpecifyType(bool specifyType = true);
+
+    /// <summary>
+    ///     Specifies mode of handling null values
+    /// </summary>
+    IPropertyConfigurationBuilder<THost, TProperty> WithNullValueMode(NullValueMode mode);
 }

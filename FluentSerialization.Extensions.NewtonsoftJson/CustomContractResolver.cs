@@ -22,19 +22,20 @@ internal class CustomContractResolver : DefaultContractResolver
 
     public override JsonContract ResolveContract(Type type)
     {
-        return _contractCache.GetOrAdd(type, _ =>
-        {
-            var visitor = new ConfigurationLocatingVisitor(type);
-
-            foreach (var configuration in _configuration.Types)
+        return _contractCache.GetOrAdd(type,
+            _ =>
             {
-                configuration.Accept(visitor);
-            }
+                var visitor = new ConfigurationLocatingVisitor(type);
 
-            var typeConfiguration = visitor.Configuration;
+                foreach (var configuration in _configuration.Types)
+                {
+                    configuration.Accept(visitor);
+                }
 
-            return typeConfiguration is null ? ResolveContractDefault(type) : ResolveContract(typeConfiguration);
-        });
+                var typeConfiguration = visitor.Configuration;
+
+                return typeConfiguration is null ? ResolveContractDefault(type) : ResolveContract(typeConfiguration);
+            });
     }
 
     private JsonContract ResolveContractDefault(Type type)
@@ -140,6 +141,13 @@ internal class CustomContractResolver : DefaultContractResolver
         property.Writable = configuration.AccessMode.HasFlag(ValueAccessMode.CanWrite);
         property.ShouldSerialize = serializationPredicateConsumer.Predicate;
         property.ShouldDeserialize = deserializationPredicateConsumer.Predicate;
+
+        property.NullValueHandling = configuration.NullValueMode switch
+        {
+            NullValueMode.Include => NullValueHandling.Include,
+            NullValueMode.Ignore => NullValueHandling.Ignore,
+            _ => throw new ArgumentOutOfRangeException(),
+        };
 
         if (configuration.SpecifyType is not null)
         {

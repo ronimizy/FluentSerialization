@@ -1,5 +1,6 @@
 using FluentSerialization.Exceptions;
 using FluentSerialization.Internal;
+using FluentSerialization.Models;
 
 namespace FluentSerialization.Implementations;
 
@@ -73,6 +74,12 @@ internal class ObjectPropertyConfigurationAdapter<THost, TProperty> :
     public IPropertyConfigurationBuilder<THost, object> ShouldSpecifyType(bool specifyType)
     {
         _builder.ShouldSpecifyType(specifyType);
+        return this;
+    }
+
+    public IPropertyConfigurationBuilder<THost, object> WithNullValueMode(NullValueMode mode)
+    {
+        _builder.WithNullValueMode(mode);
         return this;
     }
 

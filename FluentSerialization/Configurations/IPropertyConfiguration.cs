@@ -23,12 +23,14 @@ public interface IPropertyConfiguration
     /// <summary>
     ///     Position in serialized data
     /// </summary>
-    public int? Position { get; }
-    
+    int? Position { get; }
+
     /// <summary>
     ///     Specifies whether the property should have type explicitly specified in serialized data
     /// </summary>
-    public bool? SpecifyType { get; }
+    bool? SpecifyType { get; }
+
+    NullValueMode NullValueMode { get; }
 
     void Accept(IConversionConsumer consumer);
 

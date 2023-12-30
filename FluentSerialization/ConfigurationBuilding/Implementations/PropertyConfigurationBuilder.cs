@@ -12,6 +12,7 @@ internal class PropertyConfigurationBuilder<THost, TProperty> : IPropertyConfigu
     private ValueAccessMode _valueAccessMode;
     private int? _position;
     private bool? _shouldSpecifyType;
+    private NullValueMode _nullValueMode;
     private IConversionProvider? _conversionProvider;
     private IValuePredicateProvider? _serializationPredicateProvider;
     private IValuePredicateProvider? _deserializationPredicateProvider;
@@ -21,6 +22,7 @@ internal class PropertyConfigurationBuilder<THost, TProperty> : IPropertyConfigu
         _info = info;
         _name = info.Name;
         _valueAccessMode = ValueAccessMode.CanReadAndWrite;
+        _nullValueMode = NullValueMode.Include;
     }
 
     public IPropertyConfigurationBuilder<THost, TProperty> Called(string name)
@@ -84,6 +86,12 @@ internal class PropertyConfigurationBuilder<THost, TProperty> : IPropertyConfigu
         return this;
     }
 
+    public IPropertyConfigurationBuilder<THost, TProperty> WithNullValueMode(NullValueMode mode)
+    {
+        _nullValueMode = mode;
+        return this;
+    }
+
     public IPropertyConfigurationBuilder<THost, TCastProperty> Cast<TCastProperty>()
     {
         if (this is IPropertyConfigurationBuilder<THost, TCastProperty> builder)
@@ -102,8 +110,7 @@ internal class PropertyConfigurationBuilder<THost, TProperty> : IPropertyConfigu
 
     public IPropertyConfiguration Build()
     {
-        return new PropertyConfiguration
-        (
+        return new PropertyConfiguration(
             _info,
             _name,
             _valueAccessMode,
@@ -111,7 +118,7 @@ internal class PropertyConfigurationBuilder<THost, TProperty> : IPropertyConfigu
             _conversionProvider,
             _serializationPredicateProvider,
             _deserializationPredicateProvider,
-            _shouldSpecifyType
-        );
+            _shouldSpecifyType,
+            _nullValueMode);
     }
 }
