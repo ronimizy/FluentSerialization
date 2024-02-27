@@ -13,10 +13,12 @@ internal class CustomContractResolver : DefaultContractResolver
 {
     private readonly IConfiguration _configuration;
     private readonly ConcurrentDictionary<Type, JsonContract> _contractCache;
+    private readonly IContractResolver? _resolver;
 
-    public CustomContractResolver(IConfiguration configuration)
+    public CustomContractResolver(IConfiguration configuration, IContractResolver? resolver)
     {
         _configuration = configuration;
+        _resolver = resolver;
         _contractCache = new ConcurrentDictionary<Type, JsonContract>();
     }
 
@@ -40,7 +42,7 @@ internal class CustomContractResolver : DefaultContractResolver
 
     private JsonContract ResolveContractDefault(Type type)
     {
-        var contract = base.ResolveContract(type);
+        var contract = _resolver?.ResolveContract(type) ?? base.ResolveContract(type);
 
         if (_configuration.ShouldEraseEnumerableType is false)
             return contract;

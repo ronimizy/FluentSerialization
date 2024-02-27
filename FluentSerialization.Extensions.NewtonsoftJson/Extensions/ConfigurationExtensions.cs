@@ -12,22 +12,22 @@ public static class ConfigurationExtensions
     {
         return new JsonSerializerSettings
         {
-            SerializationBinder = new CustomSerializationBinder(configuration),
-            ContractResolver = new CustomContractResolver(configuration),
+            SerializationBinder = new CustomSerializationBinder(configuration, binder: null),
+            ContractResolver = new CustomContractResolver(configuration, resolver: null),
 
             // needed to avoid formatting overhead and potential undefined behaviour, binder will provide the correct type key
             // and ReflectionUtils.cs:150 [string GetTypeName(Type, TypeNameAssemblyFormatHandling, ISerializationBinder?)]
             // should not mess with it
             TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full,
-            
+
             TypeNameHandling = TypeNameHandling.Auto,
         };
     }
 
     public static void ApplyToSerializationSettings(this IConfiguration configuration, JsonSerializerSettings settings)
     {
-        settings.SerializationBinder = new CustomSerializationBinder(configuration);
-        settings.ContractResolver = new CustomContractResolver(configuration);
+        settings.SerializationBinder = new CustomSerializationBinder(configuration, settings.SerializationBinder);
+        settings.ContractResolver = new CustomContractResolver(configuration, settings.ContractResolver);
         settings.TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full;
         settings.TypeNameHandling = TypeNameHandling.Auto;
     }

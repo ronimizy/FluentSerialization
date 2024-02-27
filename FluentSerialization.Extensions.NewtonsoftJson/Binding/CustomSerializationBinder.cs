@@ -5,10 +5,12 @@ namespace FluentSerialization.Extensions.NewtonsoftJson.Binding;
 internal class CustomSerializationBinder : DefaultSerializationBinder
 {
     private readonly IConfiguration _configuration;
+    private readonly ISerializationBinder? _binder;
 
-    public CustomSerializationBinder(IConfiguration configuration)
+    public CustomSerializationBinder(IConfiguration configuration, ISerializationBinder? binder)
     {
         _configuration = configuration;
+        _binder = binder;
     }
 
     public override Type BindToType(string? assemblyName, string typeName)
@@ -23,7 +25,7 @@ internal class CustomSerializationBinder : DefaultSerializationBinder
                 return visitor.Type;
         }
 
-        return visitor.Type ?? base.BindToType(assemblyName, typeName);
+        return visitor.Type ?? _binder?.BindToType(assemblyName, typeName) ?? base.BindToType(assemblyName, typeName);
     }
 
     public override void BindToName(Type serializedType, out string? assemblyName, out string? typeName)
@@ -39,6 +41,12 @@ internal class CustomSerializationBinder : DefaultSerializationBinder
                 continue;
 
             typeName = visitor.Key;
+            return;
+        }
+
+        if (_binder is not null)
+        {
+            _binder.BindToName(serializedType, out assemblyName, out typeName);
             return;
         }
 
