@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentAssertions"/>
+        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+        <PackageReference Include="Verify.Xunit"/>
+        <PackageReference Include="xunit"/>
+        <PackageReference Include="xunit.runner.visualstudio" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" PrivateAssets="all"/>
+        <PackageReference Include="coverlet.collector" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" PrivateAssets="all"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\FluentSerialization.Extensions.NewtonsoftJson\FluentSerialization.Extensions.NewtonsoftJson.csproj"/>
+    </ItemGroup>
+
+</Project>

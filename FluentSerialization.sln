@@ -1,12 +1,32 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentSerialization", "FluentSerialization\FluentSerialization.csproj", "{252CE864-7AD8-4FDD-BC28-C15110A9059F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentSerialization", "src\FluentSerialization\FluentSerialization.csproj", "{252CE864-7AD8-4FDD-BC28-C15110A9059F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentSerialization.Extensions.NewtonsoftJson", "FluentSerialization.Extensions.NewtonsoftJson\FluentSerialization.Extensions.NewtonsoftJson.csproj", "{96FC8AE5-DC80-488D-95CD-4557C6A4FCA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentSerialization.Extensions.NewtonsoftJson", "src\FluentSerialization.Extensions.NewtonsoftJson\FluentSerialization.Extensions.NewtonsoftJson.csproj", "{96FC8AE5-DC80-488D-95CD-4557C6A4FCA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentSerialization.Playground", "FluentSerialization.Playground\FluentSerialization.Playground.csproj", "{A5F213E6-5389-4991-AD64-B3E24527009A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentSerialization.Playground", "sample\FluentSerialization.Playground\FluentSerialization.Playground.csproj", "{A5F213E6-5389-4991-AD64-B3E24527009A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentSerialization.Tests.NewtonsoftJson", "FluentSerialization.Tests.NewtonsoftJson\FluentSerialization.Tests.NewtonsoftJson.csproj", "{D0B91D5E-98B4-4513-9099-25077F67E271}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentSerialization.Tests.NewtonsoftJson", "tests\FluentSerialization.Tests.NewtonsoftJson\FluentSerialization.Tests.NewtonsoftJson.csproj", "{D0B91D5E-98B4-4513-9099-25077F67E271}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1A5E7F7C-33B9-4C3A-A39A-68C026614E1E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D717C30E-7ADA-439A-8B14-D8EB063272D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{E3961E74-99BA-4019-A834-C8A9629FB2D5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{578ED783-A785-4DA5-997D-86BFA391B362}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		.gitignore = .gitignore
+		Directory.Packages.props = Directory.Packages.props
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{A20ECA61-D3BE-4862-8B6E-05588FCEED47}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\publish.yaml = .github\workflows\publish.yaml
+		.github\workflows\build-test.yaml = .github\workflows\build-test.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +50,12 @@ Global
 		{D0B91D5E-98B4-4513-9099-25077F67E271}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0B91D5E-98B4-4513-9099-25077F67E271}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0B91D5E-98B4-4513-9099-25077F67E271}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{252CE864-7AD8-4FDD-BC28-C15110A9059F} = {1A5E7F7C-33B9-4C3A-A39A-68C026614E1E}
+		{96FC8AE5-DC80-488D-95CD-4557C6A4FCA8} = {1A5E7F7C-33B9-4C3A-A39A-68C026614E1E}
+		{D0B91D5E-98B4-4513-9099-25077F67E271} = {D717C30E-7ADA-439A-8B14-D8EB063272D2}
+		{A5F213E6-5389-4991-AD64-B3E24527009A} = {E3961E74-99BA-4019-A834-C8A9629FB2D5}
+		{A20ECA61-D3BE-4862-8B6E-05588FCEED47} = {578ED783-A785-4DA5-997D-86BFA391B362}
 	EndGlobalSection
 EndGlobal
