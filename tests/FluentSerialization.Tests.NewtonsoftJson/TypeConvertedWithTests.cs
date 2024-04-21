@@ -13,7 +13,7 @@ public class TypeConvertedWithTests
         // Arrange
         var obj = new Record("test");
 
-        var settings = ConfigurationBuilder.Build(configuration =>
+        var settings = SerializationConfigurationFactory.Build(configuration =>
         {
             configuration.Type<Record>().ConvertedWith(x => x.Value, x => new Record(x));
         }).AsNewtonsoftSerializationSettings();
@@ -32,7 +32,7 @@ public class TypeConvertedWithTests
     public void DeserializeObject_Should_UseTypeConverterCorrectly()
     {
         // Arrange
-        var settings = ConfigurationBuilder.Build(configuration =>
+        var settings = SerializationConfigurationFactory.Build(configuration =>
         {
             configuration.Type<Record>().ConvertedWith(x => x.Value, x => new Record(x));
         }).AsNewtonsoftSerializationSettings();

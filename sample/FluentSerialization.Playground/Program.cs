@@ -4,15 +4,23 @@ using FluentSerialization.Extensions;
 using FluentSerialization.Extensions.NewtonsoftJson;
 using FluentSerialization.Playground;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
-var serviceCollection = new ServiceCollection();
-serviceCollection.AddFluentSerialization(new SerializationConfiguration()).AddNewtonsoftJson();
+var collection = new ServiceCollection();
 
-var provider = serviceCollection.BuildServiceProvider();
+collection.AddFluentSerialization(c => c.WithConfiguration<SerializationConfiguration>());
+
+collection
+    .AddOptions<JsonSerializerSettings>()
+    .UseFluentSerialization();
+
+collection.AddSingleton(p => p.GetRequiredService<IOptions<JsonSerializerSettings>>().Value);
+
+var provider = collection.BuildServiceProvider();
 var settings = provider.GetRequiredService<JsonSerializerSettings>();
 
-IReadOnlyCollection<A> array = new A[]
+IReadOnlyCollection<A> array = new[]
 {
     new A(1, 2),
     new D(3, 4),

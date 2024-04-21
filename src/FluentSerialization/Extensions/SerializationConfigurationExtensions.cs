@@ -6,5 +6,5 @@ public static class SerializationConfigurationExtensions
     ///     Builds a configuration with default validators
     /// </summary>
     public static IConfiguration Build(this ISerializationConfiguration configuration)
-        => ConfigurationBuilder.Build(configuration);
+        => SerializationConfigurationFactory.Build(configuration);
 }

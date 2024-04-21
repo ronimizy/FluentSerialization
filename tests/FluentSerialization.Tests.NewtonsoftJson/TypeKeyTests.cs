@@ -97,7 +97,7 @@ public class TypeKeyTests
         // Arrange
         var obj = new FirstDerived(1, "a");
 
-        var settings = ConfigurationBuilder.Build(configuration =>
+        var settings = SerializationConfigurationFactory.Build(configuration =>
         {
             configuration.Type<FirstDerived>().HasSerializationTypeKey("A");
             configuration.Type<ThirdDerived>().HasDeserializationTypeKey("A");
