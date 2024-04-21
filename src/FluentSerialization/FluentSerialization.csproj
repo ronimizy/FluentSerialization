@@ -3,29 +3,40 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageId>ronimizy.FluentSerialization</PackageId>
     </PropertyGroup>
 
     <PropertyGroup>
-        <Title>FluentSerialization</Title>
         <Authors>ronimizy</Authors>
-        <Description>A convension based tool for configuring serialization contracts with fluent API</Description>
-        <PackageProjectUrl>https://github.com/ronimizy/FluentSerialization</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/ronimizy/FluentSerialization</RepositoryUrl>
-        <RepositoryType>github</RepositoryType>
+        <Title>FluentSerialization</Title>
+        <PackageId>ronimizy.FluentSerialization</PackageId>
         <PackageTags>serialization;fluent;configuration;contract</PackageTags>
+
+        <Description>
+            A convension based tool for configuring serialization contracts with fluent API
+        </Description>
     </PropertyGroup>
 
     <PropertyGroup>
-        <PackageVersion>1.2.0</PackageVersion>
+        <RepositoryUrl>https://github.com/ronimizy/FluentSerialization</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/ronimizy/FluentSerialization</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/ronimizy/FluentSerialization/LICENSE</PackageLicenseUrl>
+        <RepositoryType>github</RepositoryType>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageReleaseNotes>Added options</PackageReleaseNotes>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PatchVersion>0</PatchVersion>
+        <PackageVersion>1.3.$(PatchVersion)</PackageVersion>
+
+        <PackageReleaseNotes>
+            Added options
+        </PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\README.md" Pack="true" PackagePath="\"/>
-        <None Include="..\LICENSE" Pack="true" PackagePath="\"/>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+        <None Include="..\..\LICENSE" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
     <ItemGroup>
