@@ -18,7 +18,6 @@
     <PropertyGroup>
         <PackageProjectUrl>https://github.com/ronimizy/FluentSerialization</PackageProjectUrl>
         <RepositoryUrl>https://github.com/ronimizy/FluentSerialization</RepositoryUrl>
-        <PackageLicenseUrl>https://github.com/ronimizy/FluentSerialization/LICENSE</PackageLicenseUrl>
         <RepositoryType>github</RepositoryType>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
