@@ -13,7 +13,7 @@ public class FieldsTest
         // Arrange
         var obj = new Type();
 
-        var settings = ConfigurationBuilder.Build(configuration =>
+        var settings = SerializationConfigurationFactory.Build(configuration =>
         {
             configuration.Type<Type>().Property("_a").Called("A");
             configuration.Type<Type>().Property(x => x._b).Called("B");
@@ -35,7 +35,7 @@ public class FieldsTest
         // Arrange
         var obj = new Type();
         
-        var settings = ConfigurationBuilder.Build(configuration =>
+        var settings = SerializationConfigurationFactory.Build(configuration =>
         {
             configuration.Type<Type>().Property("_a").Called("A");
             configuration.Type<Type>().Property(x => x._b).Called("B");

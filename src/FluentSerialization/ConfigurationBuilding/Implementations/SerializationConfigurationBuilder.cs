@@ -19,7 +19,7 @@ internal class SerializationConfigurationBuilder : ISerializationConfigurationBu
         _builders = new Dictionary<Type, ITypeConfigurationBuilderInternal>();
     }
 
-    public IReadOnlyCollection<ITypeConfigurationBuilderInternal> Builders => _builders.Values;
+    public IEnumerable<ITypeConfigurationBuilderInternal> Builders => _builders.Values;
 
     public ITypeConfigurationBuilder<T> Type<T>()
         => GetOrAddBuilder<T>();

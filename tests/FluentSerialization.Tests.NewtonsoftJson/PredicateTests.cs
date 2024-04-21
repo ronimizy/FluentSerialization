@@ -13,7 +13,7 @@ public class PredicateTests
     public async Task SerializeObject_Should_SerializeWhenValueIsOdd(int value)
     {
         // Arrange
-        var settings = ConfigurationBuilder.Build(builder =>
+        var settings = SerializationConfigurationFactory.Build(builder =>
         {
             builder.Type<Record>().Property(x => x.Value).ShouldSerializeWhen(x => x.Value % 2 is 1);
         }).AsNewtonsoftSerializationSettings();
@@ -37,7 +37,7 @@ public class PredicateTests
     public void DeserializeObject_Should_DeserializeWhenFlagInOn(bool flag, int value ,int expected)
     {
         // Arrange
-        var settings = ConfigurationBuilder.Build(builder =>
+        var settings = SerializationConfigurationFactory.Build(builder =>
         {
             builder.Type<PlainObject>().Property(x => x.Value).ShouldDeserializeWhen(x => x.ShouldDeserialize);
         }).AsNewtonsoftSerializationSettings();

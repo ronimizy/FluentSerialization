@@ -13,7 +13,7 @@ public class PositionTests
         // Arrange
         var obj = new Record(1, 2);
 
-        var settings = ConfigurationBuilder.Build(configuration =>
+        var settings = SerializationConfigurationFactory.Build(configuration =>
         {
             configuration.Type<Record>(builder =>
             {
@@ -38,7 +38,7 @@ public class PositionTests
         // Arrange
         var obj = new Record(1, 2);
 
-        var settings = ConfigurationBuilder.Build(configuration =>
+        var settings = SerializationConfigurationFactory.Build(configuration =>
         {
             configuration.Type<Record>(builder =>
             {

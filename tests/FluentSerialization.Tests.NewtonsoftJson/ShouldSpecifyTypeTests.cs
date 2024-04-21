@@ -12,7 +12,7 @@ public class ShouldSpecifyTypeTests
         // Arrange
         var obj = new Container(new SubRecord());
 
-        var settings = ConfigurationBuilder.Build(configuration =>
+        var settings = SerializationConfigurationFactory.Build(configuration =>
         {
             configuration.Type<Container>().Property(x => x.Record).ShouldSpecifyType();
         }).AsNewtonsoftSerializationSettings();
@@ -33,7 +33,7 @@ public class ShouldSpecifyTypeTests
         // Arrange
         var obj = new Container(new SubRecord());
 
-        var settings = ConfigurationBuilder.Build(configuration =>
+        var settings = SerializationConfigurationFactory.Build(configuration =>
         {
             configuration.Type<Container>().Property(x => x.Record).ShouldSpecifyType(false);
         }).AsNewtonsoftSerializationSettings();
