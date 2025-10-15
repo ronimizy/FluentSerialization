@@ -31,15 +31,7 @@ internal class ConversionJsonConverter<TSource, TDestination> : JsonConverter<TS
         bool hasExistingValue,
         JsonSerializer serializer)
     {
-        try
-        {
-            TDestination? convertedValue = serializer.Deserialize<TDestination>(reader);
-            return convertedValue is null ? default : _conversion.ConvertFrom(convertedValue);
-        }
-        catch (JsonSerializationException)
-        {
-            var emptySerializer = new JsonSerializer();
-            return emptySerializer.Deserialize<TSource>(reader);
-        }
+        TDestination? convertedValue = serializer.Deserialize<TDestination>(reader);
+        return convertedValue is null ? default : _conversion.ConvertFrom(convertedValue);
     }
 }
