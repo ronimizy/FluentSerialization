@@ -11,26 +11,39 @@ namespace FluentSerialization.Implementations;
 internal class SerializationConfigurationBuilder : ISerializationConfigurationBuilder
 {
     private readonly Dictionary<Type, ITypeConfigurationBuilderInternal> _builders;
+    private readonly List<IConversionProvider> _conversionProviders;
     private readonly FluentSerializationOptions _options;
 
     public SerializationConfigurationBuilder(FluentSerializationOptions options)
     {
         _options = options;
-        _builders = new Dictionary<Type, ITypeConfigurationBuilderInternal>();
+        _builders = [];
+        _conversionProviders = [];
     }
 
     public IEnumerable<ITypeConfigurationBuilderInternal> Builders => _builders.Values;
 
+    public IEnumerable<IConversionProvider> Conversions => _conversionProviders;
+
     public ITypeConfigurationBuilder<T> Type<T>()
         => GetOrAddBuilder<T>();
 
-    public void Type<T>(Action<ITypeConfigurationBuilder<T>> configuration)
+    public ISerializationConfigurationBuilder Type<T>(Action<ITypeConfigurationBuilder<T>> configuration)
     {
         ITypeConfigurationBuilder<T> builder = GetOrAddBuilder<T>();
         configuration(builder);
+
+        return this;
     }
 
-    public void AddConfigurationsFromAssemblies(params AssemblyProvider[] providers)
+    public ISerializationConfigurationBuilder Conversion<TSource, TDestination>(
+        IConversion<TSource, TDestination> conversion)
+    {
+        _conversionProviders.Add(new ConversionProvider<TSource, TDestination>(conversion));
+        return this;
+    }
+
+    public ISerializationConfigurationBuilder AddConfigurationsFromAssemblies(params AssemblyProvider[] providers)
     {
         var scanner = new AssemblyScanner(providers);
 
@@ -70,10 +83,15 @@ internal class SerializationConfigurationBuilder : ISerializationConfigurationBu
             var binder = (ITypeConfigurationBinder)Activator.CreateInstance(binderType, configuration, builder);
             binder.Bind();
         }
+
+        return this;
     }
 
-    public void Options(Action<FluentSerializationOptions> options)
-        => options.Invoke(_options);
+    public ISerializationConfigurationBuilder Options(Action<FluentSerializationOptions> options)
+    {
+        options.Invoke(_options);
+        return this;
+    }
 
     private ITypeConfigurationBuilder<T> GetOrAddBuilder<T>()
     {

@@ -16,15 +16,17 @@ public interface ISerializationConfigurationBuilder
     /// <summary>
     ///     Configures the type serialization
     /// </summary>
-    void Type<T>(Action<ITypeConfigurationBuilder<T>> configuration);
+    ISerializationConfigurationBuilder Type<T>(Action<ITypeConfigurationBuilder<T>> configuration);
+
+    ISerializationConfigurationBuilder Conversion<TSource, TDestination>(IConversion<TSource, TDestination> conversion);
 
     /// <summary>
     ///     Adds configurations from the specified assemblies
     /// </summary>
-    void AddConfigurationsFromAssemblies(params AssemblyProvider[] providers);
-    
+    ISerializationConfigurationBuilder AddConfigurationsFromAssemblies(params AssemblyProvider[] providers);
+
     /// <summary>
     ///     Configures options
     /// </summary>
-    void Options(Action<FluentSerializationOptions> options);
+    ISerializationConfigurationBuilder Options(Action<FluentSerializationOptions> options);
 }

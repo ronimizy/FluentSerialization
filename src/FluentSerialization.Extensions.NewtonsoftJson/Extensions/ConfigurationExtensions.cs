@@ -1,4 +1,5 @@
 using FluentSerialization.Extensions.NewtonsoftJson.Binding;
+using FluentSerialization.Extensions.NewtonsoftJson.Conversions;
 using Newtonsoft.Json;
 
 namespace FluentSerialization.Extensions.NewtonsoftJson;
@@ -10,25 +11,39 @@ public static class ConfigurationExtensions
     /// </summary>
     public static JsonSerializerSettings AsNewtonsoftSerializationSettings(this IConfiguration configuration)
     {
-        return new JsonSerializerSettings
-        {
-            SerializationBinder = new CustomSerializationBinder(configuration),
-            ContractResolver = new CustomContractResolver(configuration),
+        var settings = new JsonSerializerSettings();
+        ApplyToSerializationSettings(configuration, settings);
 
-            // needed to avoid formatting overhead and potential undefined behaviour, binder will provide the correct type key
-            // and ReflectionUtils.cs:150 [string GetTypeName(Type, TypeNameAssemblyFormatHandling, ISerializationBinder?)]
-            // should not mess with it
-            TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full,
-            
-            TypeNameHandling = TypeNameHandling.Auto,
-        };
+        return settings;
     }
 
     public static void ApplyToSerializationSettings(this IConfiguration configuration, JsonSerializerSettings settings)
     {
         settings.SerializationBinder = new CustomSerializationBinder(configuration);
         settings.ContractResolver = new CustomContractResolver(configuration);
+
+        // needed to avoid formatting overhead and potential undefined behaviour, binder will provide the correct type key
+        // and ReflectionUtils.cs:150 [string GetTypeName(Type, TypeNameAssemblyFormatHandling, ISerializationBinder?)]
+        // should not mess with it
         settings.TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full;
+
         settings.TypeNameHandling = TypeNameHandling.Auto;
+
+        foreach (JsonConverter converter in EnumerateConverters(configuration))
+        {
+            settings.Converters.Add(converter);
+        }
+    }
+
+    private static IEnumerable<JsonConverter> EnumerateConverters(IConfiguration configuration)
+    {
+        foreach (IConversionProvider conversionProvider in configuration.Conversions)
+        {
+            var consumer = new ConversionConsumer();
+            conversionProvider.Provide(consumer);
+
+            if (consumer.Converter is not null)
+                yield return consumer.Converter;
+        }
     }
 }

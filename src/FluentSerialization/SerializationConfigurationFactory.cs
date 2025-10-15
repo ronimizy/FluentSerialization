@@ -42,7 +42,7 @@ public static class SerializationConfigurationFactory
     {
         var options = new FluentSerializationOptions();
 
-        ITypeConfiguration[] typeConfigurations = configurations
+        var builders = configurations
             .Select(x =>
             {
                 var serializationBuilder = new SerializationConfigurationBuilder(options);
@@ -50,8 +50,15 @@ public static class SerializationConfigurationFactory
 
                 return serializationBuilder;
             })
+            .ToArray();
+
+        ITypeConfiguration[] typeConfigurations = builders
             .SelectMany(x => x.Builders)
             .Select(x => x.Build())
+            .ToArray();
+
+        IConversionProvider[] conversions = builders
+            .SelectMany(builder => builder.Conversions)
             .ToArray();
 
         ConfigurationValidationResult.FailureResult[] errors = Validators.Concat(validators)
@@ -60,7 +67,7 @@ public static class SerializationConfigurationFactory
             .ToArray();
 
         if (errors.Length is 0)
-            return new Configuration(BuildForest(typeConfigurations), options);
+            return new Configuration(BuildForest(typeConfigurations), options, conversions);
 
         var builder = new StringBuilder("Invalid serialization configuration:\n");
         Exception? exception = null;

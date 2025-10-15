@@ -19,7 +19,7 @@ internal class ConversionJsonConverter<TSource, TDestination> : JsonConverter<TS
         }
         else
         {
-            var convertedValue = _conversion.ConvertTo(value);
+            TDestination convertedValue = _conversion.ConvertTo(value);
             serializer.Serialize(writer, convertedValue);
         }
     }
@@ -31,7 +31,15 @@ internal class ConversionJsonConverter<TSource, TDestination> : JsonConverter<TS
         bool hasExistingValue,
         JsonSerializer serializer)
     {
-        var convertedValue = serializer.Deserialize<TDestination>(reader);
-        return convertedValue is null ? default : _conversion.ConvertFrom(convertedValue);
+        try
+        {
+            TDestination? convertedValue = serializer.Deserialize<TDestination>(reader);
+            return convertedValue is null ? default : _conversion.ConvertFrom(convertedValue);
+        }
+        catch (JsonSerializationException)
+        {
+            var emptySerializer = new JsonSerializer();
+            return emptySerializer.Deserialize<TSource>(reader);
+        }
     }
 }

@@ -7,5 +7,7 @@ public interface IConfiguration
 {
     IReadOnlyCollection<ITypeConfiguration> Types { get; }
     
+    IReadOnlyCollection<IConversionProvider> Conversions { get; }
+    
     bool ShouldEraseEnumerableType { get; }
 }
