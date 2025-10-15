@@ -15,13 +15,14 @@ internal class FluentSerializationConfigurator : IFluentSerializationConfigurato
     public IFluentSerializationConfigurator WithConfiguration<TConfiguration>()
         where TConfiguration : class, ISerializationConfiguration
     {
-        _collection.TryAddSingleton<ISerializationConfiguration, TConfiguration>();
+        _collection.TryAddEnumerable(ServiceDescriptor.Singleton<ISerializationConfiguration, TConfiguration>());
         return this;
     }
 
-    public IFluentSerializationConfigurator WithValidator<TValidator>() where TValidator : class, IConfigurationValidator
+    public IFluentSerializationConfigurator WithValidator<TValidator>()
+        where TValidator : class, IConfigurationValidator
     {
-        _collection.TryAddSingleton<IConfigurationValidator, TValidator>();
+        _collection.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigurationValidator, TValidator>());
         return this;
     }
 }
