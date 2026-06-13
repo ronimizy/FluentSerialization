@@ -15,6 +15,7 @@ internal class PropertyConfigurationBuilder<THost, TProperty> : IPropertyConfigu
     private IConversionProvider? _conversionProvider;
     private IValuePredicateProvider? _serializationPredicateProvider;
     private IValuePredicateProvider? _deserializationPredicateProvider;
+    private bool? _ignoreNulls;
 
     public PropertyConfigurationBuilder(MemberInfo info)
     {
@@ -84,6 +85,12 @@ internal class PropertyConfigurationBuilder<THost, TProperty> : IPropertyConfigu
         return this;
     }
 
+    public IPropertyConfigurationBuilder<THost, TProperty> IgnoreNulls()
+    {
+        _ignoreNulls = true;
+        return this;
+    }
+
     public IPropertyConfigurationBuilder<THost, TCastProperty> Cast<TCastProperty>()
     {
         if (this is IPropertyConfigurationBuilder<THost, TCastProperty> builder)
@@ -111,7 +118,8 @@ internal class PropertyConfigurationBuilder<THost, TProperty> : IPropertyConfigu
             _conversionProvider,
             _serializationPredicateProvider,
             _deserializationPredicateProvider,
-            _shouldSpecifyType
+            _shouldSpecifyType,
+            _ignoreNulls
         );
     }
 }

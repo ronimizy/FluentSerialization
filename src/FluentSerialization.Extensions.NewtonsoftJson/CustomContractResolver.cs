@@ -141,6 +141,13 @@ internal class CustomContractResolver : DefaultContractResolver
         property.ShouldSerialize = serializationPredicateConsumer.Predicate;
         property.ShouldDeserialize = deserializationPredicateConsumer.Predicate;
 
+        property.NullValueHandling = configuration.IgnoreNulls switch
+        {
+            null => null,
+            true => NullValueHandling.Ignore,
+            false => NullValueHandling.Include,
+        };
+
         if (configuration.SpecifyType is not null)
         {
             property.TypeNameHandling = configuration.SpecifyType.Value ? TypeNameHandling.All : TypeNameHandling.None;

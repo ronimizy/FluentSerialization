@@ -66,4 +66,9 @@ public interface IPropertyConfigurationBuilder<out THost, TProperty>
     ///     Specifies whether the property should have type explicitly specified in serialized data
     /// </summary>
     IPropertyConfigurationBuilder<THost, TProperty> ShouldSpecifyType(bool specifyType = true);
+
+    /// <summary>
+    ///     Specifies that null values should be ignored when serializing
+    /// </summary>
+    IPropertyConfigurationBuilder<THost, TProperty> IgnoreNulls();
 }

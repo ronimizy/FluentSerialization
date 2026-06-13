@@ -29,6 +29,11 @@ public interface IPropertyConfiguration
     ///     Specifies whether the property should have type explicitly specified in serialized data
     /// </summary>
     public bool? SpecifyType { get; }
+    
+    /// <summary>
+    ///     Specifies whether the property should be ignored when null
+    /// </summary>
+    public bool? IgnoreNulls { get; }
 
     void Accept(IConversionConsumer consumer);
 

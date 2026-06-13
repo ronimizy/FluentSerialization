@@ -76,6 +76,12 @@ internal class ObjectPropertyConfigurationAdapter<THost, TProperty> :
         return this;
     }
 
+    public IPropertyConfigurationBuilder<THost, object> IgnoreNulls()
+    {
+        _builder.IgnoreNulls();
+        return this;
+    }
+
     public IPropertyConfigurationBuilder<THost, TCastProperty> Cast<TCastProperty>()
     {
         if (this is IPropertyConfigurationBuilder<THost, TCastProperty> builder)
